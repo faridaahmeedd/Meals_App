@@ -27,9 +27,23 @@ class _DetailsScreenState extends ConsumerState<DetailsScreen> {
                     .toggleMealFavStatus(widget.meal);
               });
             },
-            icon: ref.read(favoritesProvider.notifier).state.contains(widget.meal) == true
-                ? const Icon(Icons.star, color: Colors.red)
-                : const Icon(Icons.star, color: Colors.white),
+            icon: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 300),
+              transitionBuilder: (child, animation){
+                return RotationTransition(
+                  turns: Tween(
+                    begin: 0.8,
+                    end: 1.0,
+                  ).animate(animation),
+                  child: child,);
+              },
+              child: Icon (Icons.star,
+                key: ValueKey(ref.read(favoritesProvider.notifier).state.contains(widget.meal)),
+                color: ref.read(favoritesProvider.notifier).state.contains(widget.meal) == true
+                    ? Colors.red
+                    : Colors.white
+              )
+            )
           ),
         ],
       ),
@@ -38,12 +52,14 @@ class _DetailsScreenState extends ConsumerState<DetailsScreen> {
           child: Column(
             children: [
               // Text(widget.meal.title),
-              const Image(
+              Hero(
+                tag: widget.meal.id,
+                  child: const Image(
                 image: AssetImage('assets/burger.jpg'),
                 height: 200,
                 width: 250,
                 fit: BoxFit.cover,
-              ),
+              )),
               const SizedBox(height: 10),
               Text('Ingredients',
                   style: Theme.of(context).textTheme.headlineSmall!.copyWith(

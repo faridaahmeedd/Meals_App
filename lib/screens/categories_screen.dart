@@ -3,10 +3,17 @@ import '../data/categories_data.dart';
 import '../models/meal.dart';
 import '../widgets/category_item.dart';
 
-class CategoriesScreen extends StatelessWidget {
+class CategoriesScreen extends StatefulWidget {
   final List<Meal> availableMeals;
-  const CategoriesScreen({Key? key, required this.availableMeals}) : super(key: key);
 
+  const CategoriesScreen({Key? key, required this.availableMeals})
+      : super(key: key);
+
+  @override
+  State<CategoriesScreen> createState() => _CategoriesScreenState();
+}
+
+class _CategoriesScreenState extends State<CategoriesScreen> {
   @override
   Widget build(BuildContext context) {
     return GridView(
@@ -21,9 +28,10 @@ class CategoriesScreen extends StatelessWidget {
           ...availableCategories
               .map((category) => GridItem(
                     category: category,
-                    availableMeals: availableMeals,
+                    availableMeals: widget.availableMeals,
                   ))
-              .toList(), //... is spread operator to convert list to individual items
+              .toList(),
+          //... is spread operator to convert list to individual items
         ]);
   }
 }

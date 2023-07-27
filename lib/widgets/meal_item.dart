@@ -25,13 +25,16 @@ class MealItem extends StatelessWidget {
           },
           child: Stack(
             children: [
-              const FadeInImage(
+              Hero(
+                tag: meal.id,
+                child: const FadeInImage(
                 placeholder: AssetImage('assets/burger.jpg'),
                 image: AssetImage('assets/burger.jpg'),
                 // image: NetworkImage(meal.imageUrl),
                 height: 200,
                 width: double.infinity,
                 fit: BoxFit.cover,
+              ),
               ),
               Positioned(
                 bottom: 0,
