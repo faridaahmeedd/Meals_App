@@ -4,11 +4,13 @@ import '../screens/details_screen.dart';
 
 class MealItem extends StatelessWidget {
   final Meal meal;
+
   const MealItem({super.key, required this.meal});
 
   void selectMeal(BuildContext context) {
     print('MealItem: ${meal.title}');
-    Navigator.push(context, MaterialPageRoute(builder: (ctx) => DetailsScreen(meal: meal)));
+    Navigator.push(context,
+        MaterialPageRoute(builder: (ctx) => DetailsScreen(meal: meal)));
   }
 
   @override
@@ -27,14 +29,20 @@ class MealItem extends StatelessWidget {
             children: [
               Hero(
                 tag: meal.id,
-                child: const FadeInImage(
-                placeholder: AssetImage('assets/burger.jpg'),
-                image: AssetImage('assets/burger.jpg'),
+            // const FadeInImage(
+                // placeholder: AssetImage('assets/burger.jpg'),
+                // image: AssetImage('assets/burger.jpg'),
                 // image: NetworkImage(meal.imageUrl),
-                height: 200,
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ),
+                // height: 200,
+                // width: double.infinity,
+                // fit: BoxFit.cover,
+                child: Image.network(meal.imageUrl,),
+                // child:  FadeInImage(
+                //     placeholder: const AssetImage('assets/burger.jpg'),
+                //     image: NetworkImage(meal.imageUrl),
+                //     height: 200,
+                //     width: double.infinity,
+                //   ),
               ),
               Positioned(
                 bottom: 0,
@@ -62,23 +70,23 @@ class MealItem extends StatelessWidget {
                         children: [
                           Row(
                             children: [
-                              const Icon(Icons.schedule),
+                              const Icon(Icons.schedule, color: Colors.white),
                               const SizedBox(width: 2),
-                              Text('${meal.duration} min'),
+                              Text('${meal.duration} min', style: const TextStyle(color: Colors.white),),
                             ],
                           ),
                           Row(
                             children: [
-                              const Icon(Icons.work),
+                              const Icon(Icons.work, color: Colors.white),
                               const SizedBox(width: 2),
-                              Text(meal.complexityString),
+                              Text(meal.complexityString, style: const TextStyle(color: Colors.white)),
                             ],
                           ),
                           Row(
                             children: [
-                              const Icon(Icons.attach_money),
+                              const Icon(Icons.attach_money, color: Colors.white,),
                               const SizedBox(width: 2),
-                              Text(meal.affordabilityString),
+                              Text(meal.affordabilityString, style: const TextStyle(color: Colors.white)),
                             ],
                           ),
                         ],

@@ -54,12 +54,8 @@ class _DetailsScreenState extends ConsumerState<DetailsScreen> {
               // Text(widget.meal.title),
               Hero(
                 tag: widget.meal.id,
-                  child: const Image(
-                image: AssetImage('assets/burger.jpg'),
-                height: 200,
-                width: 250,
-                fit: BoxFit.cover,
-              )),
+                child: Image.network(widget.meal.imageUrl, height: 200, width: 250, fit: BoxFit.cover,),
+              ),
               const SizedBox(height: 10),
               Text('Ingredients',
                   style: Theme.of(context).textTheme.headlineSmall!.copyWith(
@@ -70,7 +66,7 @@ class _DetailsScreenState extends ConsumerState<DetailsScreen> {
               for (var ingredient in widget.meal.ingredients)
                 Text(
                   ingredient,
-                  style: const TextStyle(fontSize: 15, color: Colors.white),
+                  style: const TextStyle(fontSize: 15, color: Colors.black),
                 ),
               const SizedBox(height: 10),
               Text('Steps',
@@ -88,7 +84,7 @@ class _DetailsScreenState extends ConsumerState<DetailsScreen> {
                           style: const TextStyle(color: Colors.white))),
                   title: Text(
                     widget.meal.steps[i],
-                    style: const TextStyle(fontSize: 15, color: Colors.white),
+                    style: const TextStyle(fontSize: 17, color: Colors.black),
                     textAlign: TextAlign.justify,
                   ),
                 ),
